@@ -6,14 +6,14 @@ import colors from './js/colors-data';
 
 const startBtn = document.querySelector('button[data-action="start"]');
 const stopBtn = document.querySelector('button[data-action="stop"]');
-let timerId = null;
+let colorIntervalId = null;
 
 startBtn.addEventListener('click', onBtnStartClick);
 stopBtn.addEventListener('click', onBtnStopClick);
 
 function onBtnStartClick(e) {
   e.target.disabled = true;
-  timerId = setInterval(
+  colorIntervalId = setInterval(
     (min, max) => {
       document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
     },
@@ -25,7 +25,7 @@ function onBtnStartClick(e) {
 
 function onBtnStopClick() {
   startBtn.disabled = false;
-  clearInterval(timerId);
+  clearInterval(colorIntervalId);
 }
 
 function randomIntegerFromInterval(min, max) {
@@ -35,7 +35,7 @@ function randomIntegerFromInterval(min, max) {
 // 2 спосіб
 // const startBtn = document.querySelector('button[data-action="start"]');
 // const stopBtn = document.querySelector('button[data-action="stop"]');
-// let timerId = null;
+// let colorIntervalId = null;
 
 // const randomIntegerFromInterval = (min, max) => {
 //   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -43,7 +43,7 @@ function randomIntegerFromInterval(min, max) {
 
 // startBtn.addEventListener('click', e => {
 //   e.target.disabled = true;
-//   timerId = setInterval(() => {
+//   colorIntervalId = setInterval(() => {
 //     document.body.style.backgroundColor =
 //       colors[randomIntegerFromInterval(0, colors.length - 1)];
 //   }, 1000);
@@ -51,5 +51,5 @@ function randomIntegerFromInterval(min, max) {
 
 // stopBtn.addEventListener('click', () => {
 //   startBtn.disabled = false;
-//   clearInterval(timerId);
+//   clearInterval(colorIntervalId);
 // });
