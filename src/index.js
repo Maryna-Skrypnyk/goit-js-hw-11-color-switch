@@ -13,7 +13,6 @@ stopBtn.addEventListener('click', onBtnStopClick);
 
 function onBtnStartClick(e) {
   e.target.disabled = true;
-  console.log(555);
   timerId = setInterval(
     (min, max) => {
       document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
@@ -26,7 +25,6 @@ function onBtnStartClick(e) {
 
 function onBtnStopClick() {
   startBtn.disabled = false;
-  console.log(685);
   clearInterval(timerId);
 }
 
