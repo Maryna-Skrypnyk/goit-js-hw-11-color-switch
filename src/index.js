@@ -26,11 +26,21 @@ function onBtnStartClick(e) {
 function onBtnStopClick() {
   startBtn.disabled = false;
   clearInterval(colorIntervalId);
+  localStorage.setItem('color', document.body.style.backgroundColor);
 }
 
 function randomIntegerFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+function savedColor() {
+  const savedColor = localStorage.getItem('color');
+  if (savedColor) {
+    document.body.style.backgroundColor = savedColor;
+  }
+}
+
+savedColor();
 
 // 2 спосіб
 // const startBtn = document.querySelector('button[data-action="start"]');
