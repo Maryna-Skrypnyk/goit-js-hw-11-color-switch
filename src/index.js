@@ -1,3 +1,6 @@
+import './sass/main.scss';
+
+
 const colors = [
   '#FFFFFF',
   '#2196F3',
