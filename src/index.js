@@ -1,14 +1,8 @@
 import './sass/main.scss';
 
+import colors from './js/colors-data';
 
-const colors = [
-  '#FFFFFF',
-  '#2196F3',
-  '#4CAF50',
-  '#FF9800',
-  '#009688',
-  '#795548',
-];
+// const colors = ['#FFFFFF', '#2196F3', '#4CAF50', '#FF9800', '#009688', '#795548'];
 
 const startBtn = document.querySelector('button[data-action="start"]');
 const stopBtn = document.querySelector('button[data-action="stop"]');
@@ -19,10 +13,10 @@ stopBtn.addEventListener('click', onBtnStopClick);
 
 function onBtnStartClick(e) {
   e.target.disabled = true;
+  console.log(555);
   timerId = setInterval(
     (min, max) => {
-      document.body.style.backgroundColor =
-        colors[randomIntegerFromInterval(min, max)];
+      document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
     },
     1000,
     0,
@@ -32,6 +26,7 @@ function onBtnStartClick(e) {
 
 function onBtnStopClick() {
   startBtn.disabled = false;
+  console.log(685);
   clearInterval(timerId);
 }
 
