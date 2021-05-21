@@ -19,6 +19,7 @@ function onBtnStartClick(e) {
   colorIntervalId = setInterval(
     (min, max) => {
       document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
+      localStorage.setItem('color', document.body.style.backgroundColor);
     },
     1000,
     0,
