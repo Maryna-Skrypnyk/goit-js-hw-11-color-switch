@@ -11,8 +11,11 @@ let colorIntervalId = null;
 startBtn.addEventListener('click', onBtnStartClick);
 stopBtn.addEventListener('click', onBtnStopClick);
 
+stopBtn.disabled = true;
+
 function onBtnStartClick(e) {
   e.target.disabled = true;
+  stopBtn.disabled = false;
   colorIntervalId = setInterval(
     (min, max) => {
       document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
@@ -23,8 +26,9 @@ function onBtnStartClick(e) {
   );
 }
 
-function onBtnStopClick() {
+function onBtnStopClick(e) {
   startBtn.disabled = false;
+  e.target.disabled = true;
   clearInterval(colorIntervalId);
   localStorage.setItem('color', document.body.style.backgroundColor);
 }
