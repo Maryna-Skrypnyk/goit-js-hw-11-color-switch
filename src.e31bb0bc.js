@@ -207,33 +207,36 @@ var _colorsData = _interopRequireDefault(require("./js/colors-data"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const colors = ['#FFFFFF', '#2196F3', '#4CAF50', '#FF9800', '#009688', '#795548'];
 var startBtn = document.querySelector('button[data-action="start"]');
 var stopBtn = document.querySelector('button[data-action="stop"]');
 var colorIntervalId = null;
-startBtn.addEventListener('click', onBtnStartClick);
-stopBtn.addEventListener('click', onBtnStopClick);
 stopBtn.disabled = true;
-
-function onBtnStartClick(e) {
-  e.target.disabled = true;
-  stopBtn.disabled = false;
-  colorIntervalId = setInterval(function (min, max) {
-    document.body.style.backgroundColor = _colorsData.default[randomIntegerFromInterval(min, max)];
-    localStorage.setItem('color', document.body.style.backgroundColor);
-  }, 1000, 0, _colorsData.default.length - 1);
-}
-
-function onBtnStopClick(e) {
-  startBtn.disabled = false;
-  e.target.disabled = true;
-  clearInterval(colorIntervalId);
-  localStorage.setItem('color', document.body.style.backgroundColor);
-}
 
 function randomIntegerFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+startBtn.addEventListener('click', function (e) {
+  e.target.disabled = true;
+  stopBtn.disabled = false;
+
+  if (colorIntervalId) {
+    return;
+  }
+
+  colorIntervalId = setInterval(function () {
+    document.body.style.backgroundColor = _colorsData.default[randomIntegerFromInterval(0, _colorsData.default.length - 1)];
+    localStorage.setItem('color', document.body.style.backgroundColor);
+  }, 1000);
+  console.log(colorIntervalId);
+});
+stopBtn.addEventListener('click', function (e) {
+  e.target.disabled = true;
+  startBtn.disabled = false;
+  clearInterval(colorIntervalId);
+  localStorage.setItem('color', document.body.style.backgroundColor);
+  colorIntervalId = null;
+});
 
 function savedColor() {
   var savedColor = localStorage.getItem('color');
@@ -247,20 +250,43 @@ savedColor(); // 2 спосіб
 // const startBtn = document.querySelector('button[data-action="start"]');
 // const stopBtn = document.querySelector('button[data-action="stop"]');
 // let colorIntervalId = null;
-// const randomIntegerFromInterval = (min, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// };
-// startBtn.addEventListener('click', e => {
+// startBtn.addEventListener('click', onBtnStartClick);
+// stopBtn.disabled = true;
+// function onBtnStartClick(e) {
 //   e.target.disabled = true;
-//   colorIntervalId = setInterval(() => {
-//     document.body.style.backgroundColor =
-//       colors[randomIntegerFromInterval(0, colors.length - 1)];
-//   }, 1000);
-// });
-// stopBtn.addEventListener('click', () => {
+//   stopBtn.disabled = false;
+//   colorIntervalId = setInterval(
+//     (min, max) => {
+//       document.body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
+//       localStorage.setItem('color', document.body.style.backgroundColor);
+//     },
+//     1000,
+//     0,
+//     colors.length - 1,
+//   );
+//   startBtn.removeEventListener('click', onBtnStartClick);
+//   stopBtn.addEventListener('click', onBtnStopClick);
+//   console.log(colorIntervalId);
+// }
+// function onBtnStopClick(e) {
 //   startBtn.disabled = false;
+//   e.target.disabled = true;
 //   clearInterval(colorIntervalId);
-// });
+//   localStorage.setItem('color', document.body.style.backgroundColor);
+//   stopBtn.removeEventListener('click', onBtnStopClick);
+//   startBtn.addEventListener('click', onBtnStartClick);
+//   console.log(colorIntervalId);
+// }
+// function randomIntegerFromInterval(min, max) {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+// function savedColor() {
+//   const savedColor = localStorage.getItem('color');
+//   if (savedColor) {
+//     document.body.style.backgroundColor = savedColor;
+//   }
+// }
+// savedColor();
 },{"./sass/main.scss":"sass/main.scss","./js/colors-data":"js/colors-data.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -289,7 +315,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55050" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52013" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
